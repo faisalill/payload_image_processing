@@ -2,14 +2,19 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
 import cv2
+from algorithms.average_box_filter import average_box_filter
+from algorithms.bilateral_filter import bilateral_filter
+from algorithms.canny_filter import canny_filter
 from algorithms.edge_detection import edge_detection
 from algorithms.erosion_and_dilation import dilation, erosion
 from algorithms.fourier_transform import fourier_transform
 from algorithms.gaussian_filter import gaussian_entire_image
 from algorithms.histogram_equalization import histogram_equalization
 from algorithms.k_means_clustering import k_means_clustering
+from algorithms.kalman_filter import kalman_filter
 from algorithms.median_filtering import mode_filter, median_filter
 from algorithms.image_encoder import image_encoder, image_encoder_pillow
+from algorithms.scharr_filter import scharr_filter
 from algorithms.types import algorithms
 from PIL import Image
 
@@ -21,13 +26,6 @@ def health_check():
     return jsonify({
         "message": "OK"
     })
-
-@app.route("/check", methods=['GET'])
-def health_check():
-    return jsonify({
-        "New Server Route": "Created Successfully"
-    })
-
 
 @app.route('/', methods=['POST'])
 def image_test():
@@ -86,6 +84,16 @@ def image_test():
                             processed_image = mode_filter(pillow_image, int(size))
                             encoded_image = image_encoder_pillow(processed_image)
                             return jsonify({'message': 'Image Processed Successfully', 'image': encoded_image}), 200
+                case algorithms.ScharrFilter:
+                    processed_image = scharr_filter(img)
+                case algorithms.KalmanFilter:
+                    processed_image = kalman_filter(img)
+                case algorithms.CannyFilter:
+                    processed_image = canny_filter(img)
+                case algorithms.BilateralFilter:
+                    processed_image = bilateral_filter(img)
+                case algorithms.AverageBoxFilter:
+                    processed_image = average_box_filter(img)
                 case _:
                     processed_image = edge_detection(img)
 

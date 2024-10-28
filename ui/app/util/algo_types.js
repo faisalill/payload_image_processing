@@ -7,7 +7,12 @@ const algorithm = {
   "HistogramEqualization": "histogram_equalization",
   "KMeansClustering": "k_means_clustering",
   "MedianFiltering": "median_filtering",
-  "WaveletTransformFilter": "wavelet_transform_filter"
+  "WaveletTransformFilter": "wavelet_transform_filter",
+  "ScharrFilter": "scharr_filter",
+  "KalmanFilter": "kalman_filter",
+  "CannyFilter": "canny_filter",
+  "AverageBoxFilter": "average_box_filter",
+  "BilateralFilter": "bilateral_filter"
 }
 
 export default algorithm

@@ -80,15 +80,54 @@ export default function Output({ image, backendUrl }) {
       </Card>
     }
       <Tabs defaultValue="edge_detection">
-        <TabsList className="dark justify-center">
-          <TabsTrigger value="edge_detection">Edge Detection</TabsTrigger>
-          <TabsTrigger value="erosion">Erosion</TabsTrigger>
-          <TabsTrigger value="dilation">Dilation</TabsTrigger>
-          <TabsTrigger value="fourier_transform">Fourier Transform</TabsTrigger>
-          {/* <TabsTrigger value="histogram_equalization">Histogram Equalization</TabsTrigger> */}
-          <TabsTrigger value="k_means_clustering">K Means Clustering</TabsTrigger>
-          <TabsTrigger value="median_filtering">Median Filtering</TabsTrigger>
-        </TabsList>
+        <div className="flex flex-col gap-3">
+          <TabsList className="dark justify-center">
+            <TabsTrigger value="edge_detection">Edge Detection</TabsTrigger>
+            <TabsTrigger value="erosion">Erosion</TabsTrigger>
+            <TabsTrigger value="dilation">Dilation</TabsTrigger>
+            <TabsTrigger value="fourier_transform">Fourier Transform</TabsTrigger>
+            {/* <TabsTrigger value="histogram_equalization">Histogram Equalization</TabsTrigger> */}
+            <TabsTrigger value="k_means_clustering">K Means Clustering</TabsTrigger>
+            <TabsTrigger value="median_filtering">Median Filtering</TabsTrigger>
+          </TabsList>
+          <TabsList className="dark justify-center">
+            <TabsTrigger value="scharr_filter">Scharr Filter</TabsTrigger>
+            <TabsTrigger value="kalman_filter">Kalman Filter</TabsTrigger>
+            <TabsTrigger value="canny_filter">Canny Filter</TabsTrigger>
+            <TabsTrigger value="bilateral_filter">Bilateral Filter</TabsTrigger>
+            <TabsTrigger value="average_box_filter">Average Box Filter</TabsTrigger>
+          </TabsList>
+        </div>
+        <TabsContent value="scharr_filter" className="flex flex-col items-center mt-3 gap-3">
+          <Button onClick={() => {
+            const params = `&threshold1=${edgeDetectionParams.threshold1}&threshold2=${edgeDetectionParams.threshold2}`
+            uploadImage(algorithm.ScharrFilter, params)
+          }}>Process Image</Button>
+        </TabsContent>
+        <TabsContent value="kalman_filter" className="flex flex-col items-center mt-3 gap-3">
+          <Button onClick={() => {
+            const params = `&threshold1=${edgeDetectionParams.threshold1}&threshold2=${edgeDetectionParams.threshold2}`
+            uploadImage(algorithm.KalmanFilter, params)
+          }}>Process Image</Button>
+        </TabsContent>
+        <TabsContent value="canny_filter" className="flex flex-col items-center mt-3 gap-3">
+          <Button onClick={() => {
+            const params = `&threshold1=${edgeDetectionParams.threshold1}&threshold2=${edgeDetectionParams.threshold2}`
+            uploadImage(algorithm.CannyFilter, params)
+          }}>Process Image</Button>
+        </TabsContent>
+        <TabsContent value="average_box_filter" className="flex flex-col items-center mt-3 gap-3">
+          <Button onClick={() => {
+            const params = `&threshold1=${edgeDetectionParams.threshold1}&threshold2=${edgeDetectionParams.threshold2}`
+            uploadImage(algorithm.AverageBoxFilter, params)
+          }}>Process Image</Button>
+        </TabsContent>
+        <TabsContent value="bilateral_filter" className="flex flex-col items-center mt-3 gap-3">
+          <Button onClick={() => {
+            const params = `&threshold1=${edgeDetectionParams.threshold1}&threshold2=${edgeDetectionParams.threshold2}`
+            uploadImage(algorithm.BilateralFilter, params)
+          }}>Process Image</Button>
+        </TabsContent>
         <TabsContent value="edge_detection" className="flex flex-col items-center mt-3 gap-3">
           <div>
             <Label>Upper Threshold</Label>
